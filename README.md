@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify App (working title)
 
-## Getting Started
+## The Goal
 
-First, run the development server:
+The goal of this project was to create an App that integrated the Spotify API for the [devjam](https://devjam.vercel.app/project/Spotify-API-11) Discord group. This is a unique project for the discord group as it has no provided user stories for an MVP, instead the guideline for the project was simply to create an app using the Spotify API. This is my third project with the devjam group.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+My partner works for a small record label in the Americana/Folk/Country music scene, and through conversations with her, I came up with an idea for the app -- a utility for professionals in the music industry for accessing information about artists and songs through use of the Spotify API (mostly ISRC codes). In it's essence, it is an accessible app for navigating music data with an easy-to-use user-interface.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Demo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This project is still in the early phases of production so there is no live demo at this point in time.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## User Stories
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The initial concept for the app came from a coding challenge via the [devjam](https://devjam.vercel.app/project/Spotify-API-11) group, as there were no user stories provided for an MVP we free to come up with our own:
 
-## Learn More
+### 📔 User Stories:
+1. [] A user can search by artist, album, or song name and a table will be displayed holding all information related to the current search query.
+2. [] A user can click on a provided artist, album, or song within the provided table to see a detailed view of the song's information.
+3. [] A user can specify their query by searching in categories such as by artist, album, or song.
 
-To learn more about Next.js, take a look at the following resources:
+### ⭐ Bonus features (optional):
+1. [] A user can copy cells or entire columns or rows of information from the provided table to their clipboard.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ ## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ This is a React app built with Next.js and uses Tailwind CSS for styling.
 
-## Deploy on Vercel
+ ### Dependencies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ - [Next.js ](https://nextjs.org/)
+ - [Tailwind CSS](https://tailwindcss.com/)
+ - [Spotify API](https://developer.spotify.com/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ ## What I've Learned
+
+TBD
+
+## What's next?
+
+TBD
