@@ -6,9 +6,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        bebasNeue: ['Bebas Neue', 'cursive'],
-        abel: ['Abel', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        anton: ['Anton', 'sans-serif'],
+        antonio: ['Antonio', 'sans-serif'],
+        bowlbyOne: ['Bowlby One', 'cursive'],
+        bowlbyOneSC: ['Bowlby One SC', 'cursive'],
+        monda: ['Monda', 'sans-serif'],
+        oxygenMono: ['Oxygen Mono', 'monospace'],
+        
       },
       colors: {
         white: "rgba(255,255,255)",
@@ -23,10 +27,10 @@ module.exports = {
         center: true,
       },
       boxShadow: {
-        'sharp': '0px 8px 0px rgba(64,60,58,.2);',
+        'sharp': '-4px 5px 0px rgba(90,85,80,.2);',
         'sharpHover': '0px 6px 0px rgba(64,60,58,.4);',
       }
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }

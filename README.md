@@ -12,7 +12,7 @@ This project is still in the early phases of production so there is no live demo
 
 ## User Stories
 
-The initial concept for the app came from a coding challenge via the [devjam](https://devjam.vercel.app/project/Spotify-API-11) group, as there were no user stories provided for an MVP we free to come up with our own:
+The initial concept for the app came from a coding challenge via the [devjam](https://devjam.vercel.app/project/Spotify-API-11) group, as there were no user stories provided for an MVP we were free to come up with our own:
 
 ### 📔 User Stories:
 1. [] A user can search by artist, album, or song name and a table will be displayed holding all information related to the current search query.

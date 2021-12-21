@@ -14,7 +14,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/logo.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Montserrat&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@200;300;400;600&family=Bowlby+One&family=Bowlby+One+SC&family=Monda:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />
