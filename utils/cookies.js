@@ -1,4 +1,5 @@
 import Iron from '@hapi/iron'
+import { serialize } from 'cookie'
 
 export const setAuthCookie = async (res, session, options) => {
   const defaults = {
@@ -9,6 +10,8 @@ export const setAuthCookie = async (res, session, options) => {
     path: '/',
   }
   const opts = { ...defaults, ...options } 
+
+  const { SESSION_SECRET } = process.env;
 
   try {
     const signedSession = await Iron.seal(session, SESSION_SECRET, Iron.defaults)

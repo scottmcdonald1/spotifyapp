@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import cookie from 'cookie'
+import Iron from '@hapi/iron'
 import { GetServerSideProps } from 'next'
 
 import App from '../src/App'
@@ -12,14 +13,16 @@ export const getSessionCookie = async (cookies) => {
   }
 
   const decoded = await Iron.unseal(cookie, process.env.SESSION_SECRET, Iron.defaults)
-
+  // console.log('decoded: ', decoded)
   return decoded;
 }
 
 export const getServerSideProps = async ({req}) => {
+
   try {
     const cookies = cookie.parse(req.headers.cookie || '')
     const session = await getSessionCookie(cookies)
+    console.log('session.user: ', session.user)
 
     return {
       props: {
@@ -27,6 +30,7 @@ export const getServerSideProps = async ({req}) => {
       },
     }
   } catch {
+    // console.log('catch')
     return {
       props: {},
     }

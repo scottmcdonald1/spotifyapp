@@ -17,6 +17,7 @@ const sendRefreshRedirect = (res, path = '/') => {
 
 export default async (req, res) => {
   const { code } =req.query;
+  console.log('code: ', code)
 
   try {
     const { data } = await axios.post(
