@@ -16,6 +16,9 @@ module.exports = {
       },
       colors: {
         white: "rgba(255,255,255)",
+        spotifyGreen: 'rgb(30,215,96)',
+        spotifyBlack: 'rgb(25,20,20)',
+        spotifyColor: '#191414',
         vert59: "rgb(66,143,112)",
         orangeVif: "rgb(196,94,58)",
         ombreNaturelle31: "rgb(90,85,80)",
@@ -28,6 +31,7 @@ module.exports = {
       },
       boxShadow: {
         'sharp': '-4px 5px 0px rgba(90,85,80,.2);',
+        'smallSpread': '-4px 5px 10px rgba(90,85,80,.2);',
         'sharpHover': '0px 6px 0px rgba(64,60,58,.4);',
       }
     },
