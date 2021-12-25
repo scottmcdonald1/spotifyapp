@@ -1,5 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
-
 const scopes = [
   'streaming',
   'user-read-playback-state',
