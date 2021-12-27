@@ -6,20 +6,67 @@ import Iron from '@hapi/iron'
 import Image from "next/image";
 
 
-export default function Search(props) {
+export default function Search({data, searchQuery, searchType}) {
 
     return (
-      <div className="flex flex-col justify-center items-center w-full px-8">
+      <div className="flex flex-col justify-center items-center w-full min-h-screen px-8">
         <Head>
           <title>Search - Spotify App</title>
         </Head>
 
         <SearchForm />
 
-        <Data data={props.data} />
+        {data != null ? (
+          
+          <Results data={data} searchQuery={searchQuery} searchType={searchType} />
+          
+        ) : (
+          <>
+            <h1 className="font-oxygenMono">No results found</h1>
+          </>
+        )}
+        
             
       </div>
     )
+}
+
+function Results({data, searchQuery, searchType}) {
+
+
+  
+  if (searchType === "artist") {
+
+    let key = 0;
+
+    const resultsList = data.artists.items.map(item => {
+      key++;
+      return (
+        <h1 className="m-1 font-monda">{key}. <span className="text-vert59">{item.name}</span></h1>
+      )
+      
+    })
+
+    return ( 
+      <div className="w-full px-5 break-words">
+        <h1 className="font-bowlbyOneSC">Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span></h1>
+        {resultsList}
+      </div>
+    )
+  } else {
+    const resultsList = data.tracks.items.map(item => {
+      return (
+        <Data data={item} />
+      )
+    })
+    return (
+      <div className="w-full px-5 break-words">
+        <h1 className="font-bowlbyOneSC">Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span></h1>
+
+        {resultsList}
+      </div>
+    )
+  }
 }
 
 function DataCell(props) {
@@ -53,12 +100,12 @@ function Data({data}) {
 
   return (
     <div className="w-full grid grid-cols-5 justify-center m-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
-      <div>
+      <div className="flex items-center">
         <Image src={thumbnail} width={300} height={300} />
       </div>
       <div className="col-span-4 grid grid-cols-3 m-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
         
-        <div>
+        <div className="px-2">
           <DataCell label="title" data={trackName} />
           <DataCell label="artist" data={artistName} />
           <DataCell label="album" data={albumName} />
@@ -80,66 +127,42 @@ function Data({data}) {
   )
 }
 
-// async function getAccessToken() {
-//   const client_id = process.env.SPOTIFY_CLIENT_ID;
-//   const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-
-//   const authOptions = {
-//     url: 'https://accounts.spotify.com/api/token',
-//     headers: {
-//       'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-//     },
-//     form: {
-//       grant_type: 'client_credentials'
-//     },
-//     json: true
-//   };
-  
-//   request.post(authOptions, function(error, response, body) {
-//     if (!error && response.statusCode === 200) {
-//       const token = body.access_token;
-//       return token;
-//     } else {
-//       console.error(error);
-//     }
-//   });
-// }
-
 export const getSessionCookie = async (cookies) => {
 
   console.log('working... 2')
   const cookie = cookies['auth.session'];
-  // console.log('cookie: ', cookie)
 
   if (!cookie) {
     throw new Error('Auth session not found')
   }
 
   const decoded = await Iron.unseal(cookie, process.env.SESSION_SECRET, Iron.defaults)
-  // console.log('decoded: ', decoded)
 
   return decoded;
 }
 
-export async function getServerSideProps({req}) {
-  console.log('working... 1')
+export async function getServerSideProps({req, query}) {
   const cookies = cookie.parse(req.headers.cookie || '')
-  console.log('cookies: ',cookies)
+  // const searchQuery = query.q.replaceAll(' ', '%20');
+  const searchQuery = query.q;
+  const searchType = query.type;
 
   try {
     const cookies = cookie.parse(req.headers.cookie || '')
     const session = await getSessionCookie(cookies)
 
-    console.log('working... 3')
+    // console.log('working... 3')
 
     const token = session.token.access_token;
-    console.log('token: ', token)
+    // console.log('token: ', token)
     const token2 = process.env.SPOTIFY_OAUTH_TOKEN;
-    console.log('token2: ',token2)
+    // console.log('token2: ',token2)
 
-    const url = 'https://api.spotify.com/v1/tracks/7CAfYCFKkoKPwfn9OzWXua';
+    const url = `https://api.spotify.com/v1/tracks/${searchQuery}`;
+    const url2 = `https://api.spotify.com/v1/search?q=${searchQuery}&type=${searchType}`
+    console.log('url: ', url2)
 
-    const data = await fetch(url, 
+    const data = await fetch(url2, 
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -147,16 +170,21 @@ export async function getServerSideProps({req}) {
       }
     ).then(response => response.json());
 
+    console.log('data: ', data)
+    // console.log('YOOOO: ', data.tracks.items[0]);
+
     return {
       props: {
-        data: data
+        data: data,
+        searchQuery: searchQuery,
+        searchType: searchType
       }
     }
       
   } catch {
     return {
       props: {
-        data: 'poopoopeepee'
+        data: null
       }
     }
   }
