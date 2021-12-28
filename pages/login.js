@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import querystring from 'querystring'
 import greenSpotifyLogo from '../public/spotify/Spotify_Logo_RGB_Green.png'
 
 export default function Login({genres}) {
