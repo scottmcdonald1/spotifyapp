@@ -23,7 +23,6 @@ export default function Results({data, searchQuery, searchType}) {
 
   return ( 
     <div className="w-full px-5 break-words">
-      <h1 className="font-bowlbyOneSC">Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span></h1>
       {resultsList}
     </div>
   )

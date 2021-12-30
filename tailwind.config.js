@@ -32,6 +32,7 @@ module.exports = {
       boxShadow: {
         'sharp': '-4px 5px 0px rgba(90,85,80,.2);',
         'smallSpread': '-4px 5px 10px rgba(90,85,80,.2);',
+        'insetSmallSpread': 'inset -4px 5px 10px rgba(90,85,80,.2);',
         'sharpHover': '0px 6px 0px rgba(64,60,58,.4);',
       }
     },
