@@ -6,10 +6,15 @@ export default function SearchForm() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const query = e.target.searchQuery.value;
-    const param = e.target.searchParameter.value;
-    let path = `/search?q=${query}&type=${param}`
-    router.push(path);
+
+    if (e.target.searchQuery.value === '' || e.target.searchQuery.value === undefined) {
+      alert("please enter search query")
+    } else {
+      const query = e.target.searchQuery.value;
+      const param = e.target.searchParameter.value;
+      let path = `/search?q=${query}&type=${param}`
+      router.push(path);
+    }
   }
 
   return (

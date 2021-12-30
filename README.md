@@ -16,12 +16,9 @@ The initial concept for the app came from a coding challenge via the [devjam](ht
 
 ### 📔 User Stories:
 1. ✅ A user can login with their spotify account.
-2. [] A user can search by artist, album, or song name and a table will be displayed holding all information related to the current search query.
+2. ✅ A user can search by artist or song name and a table will be displayed holding all information related to the current search query.
 3. [] A user can click on a provided artist, album, or song within the provided table to see a detailed view of the song's information.
-4. [] A user can specify their query by searching in categories such as by artist, album, or song.
-
-### ⭐ Bonus features (optional):
-1. [] A user can copy cells or entire columns or rows of information from the provided table to their clipboard.
+4. ✅ A user can specify their query by searching in categories such as by artist or song.
 
  ## Tech Stack 🥞
 

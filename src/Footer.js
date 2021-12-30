@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Footer() {
     return (
       <footer>
-        <div className="flex flex-col flex-1 justify-center items-center py-8 border-t border-vert59/25">
+        <div className="bg-white flex flex-col flex-1 justify-center items-center py-8 border-t border-ombreNaturelle31/50">
           <GitHubLink src="/logo.png" />
           <p className="font-abel text-orangeVif">Scott McDonald 2021</p>
         </div>

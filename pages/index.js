@@ -13,7 +13,7 @@ export default function Home(props) {
       </Head>
       
       <div className='flex flex-col justify-center items-center h-screen'>
-
+        
         <div className="bg-white justify-center items-center my-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
           <h1 className="font-bowlbyOneSC text-4xl">Spotify App</h1>
           <h2 className="font-monda text-xl">A Spotify Data Assistant</h2>
