@@ -8,7 +8,7 @@ import { getSessionCookie } from "..";
 import Results from "../../src/Results";
 
 
-export default function Search({user, data, searchQuery, searchType}) {
+export default function Search({user, trackData, artistData, data, searchQuery, searchType}) {
 
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen py-20">
@@ -23,8 +23,10 @@ export default function Search({user, data, searchQuery, searchType}) {
       </div>
 
       {data != null ? (
-        
+        <>
         <Results data={data} searchType={searchType} />
+        {/* <Results data={artistData} searchType="artist" /> */}
+        </>
         
       ) : (
         <>
@@ -36,9 +38,33 @@ export default function Search({user, data, searchQuery, searchType}) {
   )
 }
 
-async function getArtistResults(searchQuery) {
+async function getArtistData(searchQuery, token) {
+
   const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`;
-  return 'hello';
+
+  const artistData = await fetch(url, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  ).then(response => response.json());
+
+  return artistData;
+}
+
+async function getTrackData(searchQuery, token) {
+  const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=track`;
+
+  const trackData = await fetch(url, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  ).then(response => response.json());
+
+  return trackData;
 }
 
 export async function getServerSideProps({req, query}) {
@@ -63,10 +89,15 @@ export async function getServerSideProps({req, query}) {
       }
     ).then(response => response.json());
 
+    const artistData = await getArtistData(searchQuery, token);
+    const trackData = await getTrackData(searchQuery, token);
+
     return {
       props: {
         user: session.user,
         data: data,
+        artistData: artistData,
+        trackData: trackData,
         searchQuery: searchQuery,
         searchType: searchType
       }

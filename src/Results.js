@@ -11,14 +11,14 @@ export default function Results({data, searchType}) {
     data.artists.items.map(item => {
       key++;
       return (
-        <ArtistData data={item} listNumber={key} key={key} />
+        <ArtistData data={item} key={key} />
       )
     })
   ) : (
     data.tracks.items.map(item => {
       key++;
       return (
-        <TrackData data={item} listNumber={key} key={key} />
+        <TrackData data={item} key={key} />
       )
     })
   )
@@ -47,30 +47,28 @@ function DataCell({label, data}) {
   )
 }
 
-function ArtistData({data, listNumber}) {
+function ArtistData({data}) {
 
-  let thumbnail = ''
-
-  if (data.images[1] !== undefined) {
-    thumbnail = data.images[1].url
-  } else {
-    thumbnail = logo;
-  }
-   
+  const artwork = data.images[1] !== undefined ? (
+    <Image src={data.images[1].url} width={300} height={300} />
+  ) : (
+    <>
+      <Image src={logo} width={200} height={200} />
+      <h1 className="font-monda">no artwork available</h1>
+    </>
+  )
 
   return (
-    <div className="w-full grid grid-cols-5 justify-center m-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
-      <div className="flex items-center">
-        <Image src={thumbnail} width={300} height={300} />
+    <div className="w-full grid gap-2 sm:grid-cols-1 md:grid-cols-6 justify-center px-6 py-8 border border-ombreNaturelle31/60 shadow-sharp rounded">
+      <div className="col-span-2 flex sm:flex-row md:flex-col justify-center items-center">
+        <div className="flex flex-col items-center p-2 bg-white border-l border-b border-orangeVif shadow-spread rounded">
+          {artwork}
+        </div>
       </div>
 
-      <div className="col-span-4 grid sm:grid-cols-1 md:grid-cols-3 m-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
-        <div className="px-2">
-          <DataCell label="name" data={data.name} />
-        </div>
-        <div className="px-2">
-          <DataCell label="genres" data={data.genres.join(', ')} />
-        </div>
+      <div className="w-full bg-white sm:col-span-1 md:col-span-4 grid sm:grid-cols-1 md:grid-cols-3 sm:ml-0 ml-2 px-2 py-3 border-l border-b border-orangeVif shadow-spread rounded">
+        <DataCell label="name" data={data.name} />
+        <DataCell label="genres" data={data.genres.join(', ')} />
       </div>
     </div>
   )
