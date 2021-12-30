@@ -4,44 +4,34 @@ import cookie from 'cookie'
 import Iron from '@hapi/iron'
 
 import SearchForm from "../../src/SearchForm";
+import { getSessionCookie } from "..";
 import Results from "../../src/Results";
 
 
-export default function Search({data, searchQuery, searchType}) {
+export default function Search({user, data, searchQuery, searchType}) {
 
-    return (
-      <div className="flex flex-col justify-center items-center w-full min-h-screen px-8">
-        <Head>
-          <title>Search - Spotify App</title>
-        </Head>
+  return (
+    <div className="flex flex-col justify-center items-center w-full min-h-screen px-8 pt-20">
+      <Head>
+        <title>Search - Spotify App</title>
+      </Head>
 
-        <SearchForm />
+      <h1 className="font-bowlbyOneSC">
+        Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span>
+      </h1>
 
-        {data != null ? (
+      {data != null ? (
+        
+        <Results data={data} searchType={searchType} />
+        
+      ) : (
+        <>
+          <h1 className="font-oxygenMono">No results found</h1>
+        </>
+      )}
           
-          <Results data={data} searchQuery={searchQuery} searchType={searchType} />
-          
-        ) : (
-          <>
-            <h1 className="font-oxygenMono">No results found</h1>
-          </>
-        )}
-            
-      </div>
-    )
-}
-
-export const getSessionCookie = async (cookies) => {
-
-  const cookie = cookies['auth.session'];
-
-  if (!cookie) {
-    throw new Error('Auth session not found')
-  }
-
-  const decoded = await Iron.unseal(cookie, process.env.SESSION_SECRET, Iron.defaults)
-
-  return decoded;
+    </div>
+  )
 }
 
 export async function getServerSideProps({req, query}) {
@@ -70,13 +60,13 @@ export async function getServerSideProps({req, query}) {
       }
     ).then(response => response.json());
 
-    console.log('data: ', data)
-    console.log('dataItems: ', data.items)
-
+    // console.log('data: ', data)
+    // console.log('dataItems: ', data.items)
     // console.log('YOOOO: ', data.tracks.items[0]);
 
     return {
       props: {
+        user: session.user,
         data: data,
         searchQuery: searchQuery,
         searchType: searchType
