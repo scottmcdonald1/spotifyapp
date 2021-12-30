@@ -1,6 +1,5 @@
 import axios from 'axios';
 import URLSearchParams from '@ungap/url-search-params'
-import { NextApiRequest, NextApiResponse } from 'next';
 
 import createSpotifyApi from '../../../utils/spotify';
 import { setAuthCookie } from '../../../utils/cookies';
@@ -16,8 +15,8 @@ const sendRefreshRedirect = (res, path = '/') => {
 }
 
 export default async (req, res) => {
-  const { code } =req.query;
-  console.log('code: ', code)
+  const { code } = req.query;
+  // console.log('code: ', code)
 
   try {
     const { data } = await axios.post(
