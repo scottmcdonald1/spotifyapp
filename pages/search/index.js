@@ -11,14 +11,16 @@ import Results from "../../src/Results";
 export default function Search({user, data, searchQuery, searchType}) {
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen px-8 pt-20">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen pt-20">
       <Head>
         <title>Search - Spotify App</title>
       </Head>
 
-      <h1 className="font-bowlbyOneSC">
-        Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span>
-      </h1>
+      <div className="w-full p-4 mb-10 border-b border-ombreNaturelle31">
+        <h1 className="font-bowlbyOneSC">
+          Results for <span className="text-orangeVif">{searchQuery}</span> in <span className="text-orangeVif">{searchType}</span>
+        </h1>
+      </div>
 
       {data != null ? (
         
@@ -32,6 +34,11 @@ export default function Search({user, data, searchQuery, searchType}) {
           
     </div>
   )
+}
+
+async function getArtistResults(searchQuery) {
+  const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`;
+  return 'hello';
 }
 
 export async function getServerSideProps({req, query}) {
