@@ -32,7 +32,7 @@ The initial concept for the app came from a coding challenge via the [devjam](ht
 
  ## What I've Learned
 
-TBD
+1. Authorization code flow
 
 ## What's next?
 
