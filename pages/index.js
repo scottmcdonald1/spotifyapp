@@ -26,7 +26,8 @@ export default function Home({user}) {
 
           {user ? (
             <div>
-              <SearchForm />
+              <h2 className='font-monda text-xl'>Search form to go here</h2>
+              {/* <SearchForm /> */}
             </div>
           ) : (
             <h2 className="font-monda text-xl">Login to start searching!</h2>
