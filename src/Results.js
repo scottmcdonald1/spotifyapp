@@ -49,9 +49,9 @@ function DataCell({label, data}) {
 
 function ArtistData({data, listNumber}) {
 
-  const thumbnail = ''
+  let thumbnail = ''
 
-  if (data.images[1].url) {
+  if (data.images[1] !== undefined) {
     thumbnail = data.images[1].url
   } else {
     thumbnail = logo;
