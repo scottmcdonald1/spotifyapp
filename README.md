@@ -8,7 +8,7 @@ My partner works for a small record label in the Americana/Folk/Country music sc
 
 ## Live Demo 
 
-This project is still in the early phases of production so there is no live demo at this point in time.
+A live demo of the project can be found [here](https://spotifyapp-three.vercel.app/).
 
 ## User Stories
 

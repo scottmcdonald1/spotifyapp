@@ -11,7 +11,7 @@ import Results from "../../src/Results";
 export default function Search({user, data, searchQuery, searchType}) {
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen pt-20">
+    <div className="flex flex-col justify-center items-center w-full min-h-screen py-20">
       <Head>
         <title>Search - Spotify App</title>
       </Head>
@@ -42,7 +42,6 @@ async function getArtistResults(searchQuery) {
 }
 
 export async function getServerSideProps({req, query}) {
-  // const cookies = cookie.parse(req.headers.cookie || '')
   const searchQuery = query.q;
   const searchType = query.type;
 
@@ -51,13 +50,10 @@ export async function getServerSideProps({req, query}) {
     const session = await getSessionCookie(cookies)
 
     const token = session.token.access_token;
-    // console.log('token: ', token)
-    const token2 = process.env.SPOTIFY_OAUTH_TOKEN;
-    // console.log('token2: ',token2)
 
     const url = `https://api.spotify.com/v1/tracks/${searchQuery}`;
     const url2 = `https://api.spotify.com/v1/search?q=${searchQuery}&type=${searchType}`
-    // console.log('url: ', url2)
+
 
     const data = await fetch(url2, 
       {
@@ -66,10 +62,6 @@ export async function getServerSideProps({req, query}) {
         }
       }
     ).then(response => response.json());
-
-    // console.log('data: ', data)
-    // console.log('dataItems: ', data.items)
-    // console.log('YOOOO: ', data.tracks.items[0]);
 
     return {
       props: {

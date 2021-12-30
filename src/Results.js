@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
+import logo from '../public/logo.png'
+
 export default function Results({data, searchType}) {
 
   let key = 0;
@@ -46,7 +48,15 @@ function DataCell({label, data}) {
 }
 
 function ArtistData({data, listNumber}) {
-  const thumbnail = data.images[1].url
+
+  const thumbnail = ''
+
+  if (data.images[1].url) {
+    thumbnail = data.images[1].url
+  } else {
+    thumbnail = logo;
+  }
+   
 
   return (
     <div className="w-full grid grid-cols-5 justify-center m-4 px-5 py-3 border border-ombreNaturelle31/60 shadow-sharp rounded">
@@ -62,7 +72,6 @@ function ArtistData({data, listNumber}) {
           <DataCell label="genres" data={data.genres.join(', ')} />
         </div>
       </div>
-      {/* <h1 className="m-1 font-monda"><span className="text-vert59">{data.name}</span></h1> */}
     </div>
   )
 }
@@ -90,12 +99,12 @@ function TrackData({data, listNumber}) {
     <div className="w-full grid gap-2 sm:grid-cols-1 md:grid-cols-6 justify-center px-6 py-8 border border-ombreNaturelle31/60 shadow-sharp rounded">
       
       <div className="col-span-2 flex sm:flex-row md:flex-col justify-center items-center">
-        <div className="p-2 bg-white pb-0 shadow-spread rounded">
+        <div className="p-2 bg-white pb-0 border-l border-b border-orangeVif shadow-spread rounded">
           <Image src={thumbnail} layout="intrinsic" width={300} height={300} />
         </div>
       </div>
 
-      <div className="w-full bg-white sm:col-span-1 md:col-span-4 grid sm:grid-cols-1 md:grid-cols-3 sm:ml-0 ml-2 px-2 py-3 shadow-spread rounded">        
+      <div className="w-full bg-white sm:col-span-1 md:col-span-4 grid sm:grid-cols-1 md:grid-cols-3 sm:ml-0 ml-2 px-2 py-3 border-l border-b border-orangeVif shadow-spread rounded">        
           <DataCell label="title" data={trackName} />
           <DataCell label="artist" data={artistName} />
           <DataCell label="album" data={albumName} />
