@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 
-import SearchForm from '../src/SearchForm'
-
+import SearchForm from '../src/search/SearchForm'
 import greenSpotifyLogo from '../public/spotify/Spotify_Logo_RGB_Green.png'
 import homeIcon from '../public/home.png';
 import Link from 'next/link';

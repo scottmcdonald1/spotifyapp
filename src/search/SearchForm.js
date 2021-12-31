@@ -19,31 +19,43 @@ export default function SearchForm() {
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit} id="searchForm" className="grid grid-cols-3">
+      <form onSubmit={handleFormSubmit} id="searchForm" className="grid grid-cols-3 items-center">
+        <div className="col-span-1">
+          <input 
+            id="searchQuery"
+            name="searchQuery"
+            type="text" 
+            placeholder="search"
+            className="form-input rounded peer mt-1 w-full"
+          />
+        </div>
 
-        <input 
-          id="searchQuery"
-          name="searchQuery"
-          type="text" 
-          placeholder="search"
-          className="form-input rounded peer mt-1 w-full"
-        />
+      <div className="col-span-1 grid grid-cols-2 grid-rows-2 m-4">
 
-      <div className="grid grid-cols-2 m-4">
+        <label>
+          <input 
+            id="track"
+            name="searchParameter"
+            value="all"
+            type="radio" 
+            className="form-radio rounded peer"
+            defaultChecked
+          />
+          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">All</span>
+        </label>
 
-        <label className="flex justify-center items-center">
+        <label >
           <input 
             id="track"
             name="searchParameter"
             value="track"
             type="radio" 
             className="form-radio rounded peer"
-            defaultChecked
           />
           <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Track</span>
         </label>
 
-        <label className="flex justify-center items-center">
+        <label>
           <input 
             id="artist"
             name="searchParameter"
@@ -52,6 +64,17 @@ export default function SearchForm() {
             className="form-radio rounded peer"
           />
           <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Artist</span>
+        </label>
+
+        <label>
+          <input 
+            id="artist"
+            name="searchParameter"
+            value="album"
+            type="radio" 
+            className="form-radio rounded peer"
+          />
+          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Album</span>
         </label>
       </div>
 

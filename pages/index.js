@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import cookie from 'cookie'
 import Iron from '@hapi/iron'
-import SearchForm from '../src/SearchForm'
+import SearchForm from '../src/search/SearchForm'
 
 export default function Home({user}) {
 

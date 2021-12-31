@@ -3,12 +3,11 @@ import Head from "next/head";
 import cookie from 'cookie'
 import Iron from '@hapi/iron'
 
-import SearchForm from "../../src/SearchForm";
 import { getSessionCookie } from "..";
-import Results from "../../src/Results";
+import Results from "../../src/search/Results";
 
 
-export default function Search({user, trackData, artistData, data, searchQuery, searchType}) {
+export default function Search({user, trackData, artistData, albumData, data, searchQuery, searchType}) {
 
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen py-20">
@@ -24,8 +23,14 @@ export default function Search({user, trackData, artistData, data, searchQuery, 
 
       {data != null ? (
         <>
-        <Results data={data} searchType={searchType} />
-        {/* <Results data={artistData} searchType="artist" /> */}
+          <Results 
+          data={data} 
+          trackData={trackData}
+          artistData={artistData}
+          albumData={albumData}
+          searchType={searchType} 
+
+          />
         </>
         
       ) : (
@@ -67,6 +72,20 @@ async function getTrackData(searchQuery, token) {
   return trackData;
 }
 
+async function getAlbumData(searchQuery, token) {
+  const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=album`;
+
+  const albumData = await fetch(url, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  ).then(response => response.json());
+
+  return albumData;
+}
+
 export async function getServerSideProps({req, query}) {
   const searchQuery = query.q;
   const searchType = query.type;
@@ -91,6 +110,7 @@ export async function getServerSideProps({req, query}) {
 
     const artistData = await getArtistData(searchQuery, token);
     const trackData = await getTrackData(searchQuery, token);
+    const albumData = await getAlbumData(searchQuery, token);
 
     return {
       props: {
@@ -98,6 +118,7 @@ export async function getServerSideProps({req, query}) {
         data: data,
         artistData: artistData,
         trackData: trackData,
+        albumData: albumData,
         searchQuery: searchQuery,
         searchType: searchType
       }
