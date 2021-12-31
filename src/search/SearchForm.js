@@ -34,7 +34,7 @@ export default function SearchForm() {
 
         <label>
           <input 
-            id="track"
+            id="all"
             name="searchParameter"
             value="all"
             type="radio" 
