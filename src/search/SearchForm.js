@@ -18,21 +18,49 @@ export default function SearchForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit} id="searchForm" className="grid grid-cols-3 items-center">
-        <div className="col-span-1">
+    <div className="px-4">
+      <form onSubmit={handleFormSubmit} id="searchForm" className="grid grid-cols-4 gap-2 items-center">
+
+        <div className="col-span-2"> 
+
           <input 
             id="searchQuery"
             name="searchQuery"
             type="text" 
             placeholder="search"
-            className="form-input rounded peer mt-1 w-full"
+            className="form-input rounded peer w-full"
           />
+
         </div>
 
-      <div className="col-span-1 grid grid-cols-2 grid-rows-2 m-4">
+      <div className="col-span-1">
 
-        <label>
+        <select id="searchParameter" className="form-select rounded w-full">
+          <option value="all">all</option>
+          <option value="track">track</option>
+          <option value="artist">artist</option>
+          <option value="album">album</option>
+        </select>
+
+      </div>
+
+      <div className="col-span-1">
+        <button 
+          type="submit"
+          form="searchForm"
+          className="w-full h-full rounded-full border-2 px-6 py-2 hover:border-2 hover:border-spotifyBlack/80 hover:shadow-smallSpread transition-all duration-300 ease-in-out" 
+        >
+          search
+        </button>
+      </div>
+
+      </form>
+    </div>
+  )
+}
+
+// save until safe to delete
+        {/* <label>
           <input 
             id="all"
             name="searchParameter"
@@ -75,17 +103,4 @@ export default function SearchForm() {
             className="form-radio rounded peer"
           />
           <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Album</span>
-        </label>
-      </div>
-
-      <button 
-        type="submit"
-        form="searchForm"
-        className="w-48 rounded-full border-2 px-6 py-2 leading-tight hover:border-2 hover:border-spotifyBlack/80 hover:shadow-smallSpread transition-all duration-300 ease-in-out"      >
-        search
-      </button>
-
-      </form>
-    </div>
-  )
-}
+        </label> */}
