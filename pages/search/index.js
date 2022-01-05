@@ -29,7 +29,6 @@ export default function Search({user, trackData, artistData, albumData, data, se
           artistData={artistData}
           albumData={albumData}
           searchType={searchType} 
-
           />
         </>
         

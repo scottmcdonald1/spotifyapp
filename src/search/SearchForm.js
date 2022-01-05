@@ -33,74 +33,32 @@ export default function SearchForm() {
 
         </div>
 
-      <div className="col-span-1">
+        <div className="col-span-1">
 
-        <select id="searchParameter" className="form-select rounded w-full">
-          <option value="all">all</option>
-          <option value="track">track</option>
-          <option value="artist">artist</option>
-          <option value="album">album</option>
-        </select>
+          <select 
+            id="searchParameter" 
+            name="searchParameter"
+            className="form-select rounded w-full"
+          >
+            <option value="all">all</option>
+            <option value="track">track</option>
+            <option value="artist">artist</option>
+            <option value="album">album</option>
+          </select>
 
-      </div>
+        </div>
 
-      <div className="col-span-1">
-        <button 
-          type="submit"
-          form="searchForm"
-          className="w-full h-full rounded-full border-2 px-6 py-2 hover:border-2 hover:border-spotifyBlack/80 hover:shadow-smallSpread transition-all duration-300 ease-in-out" 
-        >
-          search
-        </button>
-      </div>
+        <div className="col-span-1">
+          <button 
+            type="submit"
+            form="searchForm"
+            className="w-full h-full rounded-full border-2 px-6 py-2 hover:border-2 hover:border-spotifyBlack/80 hover:shadow-smallSpread transition-all duration-300 ease-in-out" 
+          >
+            search
+          </button>
+        </div>
 
       </form>
     </div>
   )
 }
-
-// save until safe to delete
-        {/* <label>
-          <input 
-            id="all"
-            name="searchParameter"
-            value="all"
-            type="radio" 
-            className="form-radio rounded peer"
-            defaultChecked
-          />
-          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">All</span>
-        </label>
-
-        <label >
-          <input 
-            id="track"
-            name="searchParameter"
-            value="track"
-            type="radio" 
-            className="form-radio rounded peer"
-          />
-          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Track</span>
-        </label>
-
-        <label>
-          <input 
-            id="artist"
-            name="searchParameter"
-            value="artist"
-            type="radio" 
-            className="form-radio rounded peer"
-          />
-          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Artist</span>
-        </label>
-
-        <label>
-          <input 
-            id="artist"
-            name="searchParameter"
-            value="album"
-            type="radio" 
-            className="form-radio rounded peer"
-          />
-          <span className="text-sm font-medium text-ombreNaturelle31/70 ml-1">Album</span>
-        </label> */}

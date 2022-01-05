@@ -19,7 +19,9 @@ export default function Home({user}) {
         </div>
 
         <div className="bg-white w-1/2 justify-center items-center my-4 px-5 py-3 border-l border-b border-orangeVif shadow-spread rounded">
-          <p className='font-monda text-l'>This app was made to help users navigate the Spotify API with a simple search UI in order to find important meta data for songs, albums, and artists. It is a very helpful tool for any working professional in the music industry today.</p>
+          <p className='font-monda text-l'>
+            This app was made to help users navigate the Spotify API with a simple search UI in order to find important meta data for songs, albums, and artists. It is a very helpful tool for any working professional in the music industry today.
+          </p>
         </div>
 
         <div className="bg-white w-1/2 justify-center items-center my-4 px-5 py-3 border-l border-b border-orangeVif shadow-spread rounded">
