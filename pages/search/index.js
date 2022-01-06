@@ -7,7 +7,7 @@ import { getSessionCookie } from "..";
 import Results from "../../src/search/Results";
 
 
-export default function Search({user, trackData, artistData, albumData, data, searchQuery, searchType}) {
+export default function Search({user, trackData, artistData, albumData, searchQuery, searchType}) {
 
   return (
     <div className="flex flex-col justify-center items-center w-full min-h-screen py-20">
@@ -21,22 +21,12 @@ export default function Search({user, trackData, artistData, albumData, data, se
         </h1>
       </div>
 
-      {data != null ? (
-        <>
-          <Results 
-          data={data} 
-          trackData={trackData}
-          artistData={artistData}
-          albumData={albumData}
-          searchType={searchType} 
-          />
-        </>
-        
-      ) : (
-        <>
-          <h1 className="font-oxygenMono">No results found</h1>
-        </>
-      )}
+      <Results 
+        trackData={trackData}
+        artistData={artistData}
+        albumData={albumData}
+        searchType={searchType} 
+      />
           
     </div>
   )
@@ -95,18 +85,6 @@ export async function getServerSideProps({req, query}) {
 
     const token = session.token.access_token;
 
-    const url = `https://api.spotify.com/v1/tracks/${searchQuery}`;
-    const url2 = `https://api.spotify.com/v1/search?q=${searchQuery}&type=${searchType}`
-
-
-    const data = await fetch(url2, 
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    ).then(response => response.json());
-
     const artistData = await getArtistData(searchQuery, token);
     const trackData = await getTrackData(searchQuery, token);
     const albumData = await getAlbumData(searchQuery, token);
@@ -114,7 +92,6 @@ export async function getServerSideProps({req, query}) {
     return {
       props: {
         user: session.user,
-        data: data,
         artistData: artistData,
         trackData: trackData,
         albumData: albumData,
@@ -125,9 +102,10 @@ export async function getServerSideProps({req, query}) {
       
   } catch {
     return {
-      props: {
-        data: null
-      }
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
     }
   }
 

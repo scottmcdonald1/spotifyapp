@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import logo from '../../public/logo.png'
@@ -58,21 +58,25 @@ export default function Results({trackData, artistData, albumData, searchType}) 
 
 function AllData({trackData, artistData, albumData}) {
 
+  const [displayAllTracks, setDisplayAllTracks] = useState(false);
+
   let artistKey = 0;
   let trackKey = 0;
   let albumKey = 0;
+
+  const trackItems = displayAllTracks ? trackData.tracks.items : trackData.tracks.items.slice(0,5)
+
+  const trackDataList = trackItems.map(item => {
+    trackKey++;
+    return (
+      <TrackData data={item} key={trackKey} />
+    )
+  })
 
   const artistDataList = artistData.artists.items.map(item => {
     artistKey++;
     return (
       <ArtistData data={item} key={artistKey} />
-    )
-  })
-
-  const trackDataList = trackData.tracks.items.map(item => {
-    trackKey++;
-    return (
-      <TrackData data={item} key={trackKey} />
     )
   })
 
@@ -90,24 +94,36 @@ function AllData({trackData, artistData, albumData}) {
       <h1 className="font-bowlbyOneSC text-vert59 text-4xl text-right border-b border-orangeVif">tracks</h1>
       <div className="border border-ombreNaturelle31/60 shadow-sharp rounded px-2 pb-4">
         {trackDataList}
-        <div className="w-full grid justify-center">
-          <h1>TODO: view more/less</h1>
+        <div className="w-full grid justify-center pt-3">
+          <button 
+            className="rounded-full border hover:border-spotifyBlack hover:shadow-smallSpread text-ombreNaturelle31/70 hover:text-ombreNaturelle31 p-2 transition duration-150 ease-out"
+          >
+              view more
+          </button>
         </div>
       </div>
 
       <h1 className="font-bowlbyOneSC text-vert59 text-4xl text-right border-b border-orangeVif">Artists</h1>
       <div className="border border-ombreNaturelle31/60 shadow-sharp rounded px-2 pb-4">
         {artistDataList}
-        <div className="w-full grid justify-center">
-          <h1>TODO: view more/less</h1>
+        <div className="w-full grid justify-center pt-3">
+          <button 
+            className="rounded-full border hover:border-spotifyBlack hover:shadow-smallSpread text-ombreNaturelle31/70 hover:text-ombreNaturelle31 p-2 transition duration-150 ease-out"
+          >
+            view more
+          </button>
         </div>
       </div>
 
       <h1 className="font-bowlbyOneSC text-vert59 text-4xl text-right border-b border-orangeVif">Albums</h1>
       <div className="border border-ombreNaturelle31/60 shadow-sharp rounded px-2 pb-4">
         {albumDataList}
-        <div className="w-full grid justify-center">
-          <h1>TODO: view more/less</h1>
+        <div className="w-full grid justify-center pt-3">
+          <button 
+            className="rounded-full border hover:border-spotifyBlack hover:shadow-smallSpread text-ombreNaturelle31/70 hover:text-ombreNaturelle31 p-2 transition duration-150 ease-out"
+          >
+            view more
+          </button>
         </div>
       </div>
 
