@@ -62,8 +62,12 @@ export default function Artists({user, data, albumData, id}) {
     </>
   )
 
-  const test =  user ? (
+  return (
     <div className="w-full min-h-screen grid gap-2 grid-cols-1 justify-center items-center py-20">
+
+      <Head>
+        <title>Search - Spotify App</title>
+      </Head>
 
       <div className="w-full grid grid-cols-3 border border-ombreNaturelle31/60 shadow-sharp rounded px-2 py-4">
 
@@ -89,6 +93,7 @@ export default function Artists({user, data, albumData, id}) {
 
 
       <div className="w-full py-8 break-words grid gap-4 grid-cols-1">
+
         <div className="w-full grid col-span-1 justify-end items-center border-b border-orangeVif">
           <h1 className="font-bowlbyOneSC text-3xl text-vert59">Albums</h1>
         </div>
@@ -96,19 +101,10 @@ export default function Artists({user, data, albumData, id}) {
         <div className="grid gird-cols-1 gap-3 px-8">
           {albumItems}
         </div>
-      </div>
-    </div>
-  ) : (
-    <div className="w-screen h-screen grid justify-center items-center">No info</div>
-  )
 
-  return (
-    <>
-      <Head>
-        <title>Search - Spotify App</title>
-      </Head>
-      {test}
-    </>
+      </div>
+
+    </div>
     );
     
 }
@@ -161,12 +157,14 @@ export async function getServerSideProps({req, query}) {
     }
 
   } catch {
+
     return {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
+    
   }
 
 }

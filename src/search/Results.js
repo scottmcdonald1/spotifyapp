@@ -132,20 +132,34 @@ function AllData({trackData, artistData, albumData}) {
   )
 }
 
-function DataCell({label, data}) {
+function DataCell({label, data, url}) {
   const info = data !== '' ? (
     <h1 className="font-monda text-lg">{data}</h1>
   ) : (
     <h1 className="font-monda text-lg text-spotifyBlack/70">nothing listed</h1>
   );
-  return (
-    <div className="my-2">
-      <label className="block">
-        <span className="block text-sm font-monda mb ml-1 text-spotifyBlack/50">{label}</span>
-        <h1 className="font-monda text-xl sm:break-words"><i>{info}</i></h1>
-      </label>
-    </div>
-  )
+
+  if (url) {
+    return (
+      <div className="my-2">
+        <label className="block">
+          <span className="block text-sm font-monda mb ml-1 text-spotifyBlack/50">{label}</span>
+          <Link href={url}>
+            <h1 className="font-monda text-xl sm:break-words hover:cursor-pointer hover:underline"><i>{info}</i></h1>
+          </Link>
+        </label>
+      </div>
+    )
+  } else {
+    return (
+      <div className="my-2">
+        <label className="block">
+          <span className="block text-sm font-monda mb ml-1 text-spotifyBlack/50">{label}</span>
+          <h1 className="font-monda text-xl sm:break-words"><i>{info}</i></h1>
+        </label>
+      </div>
+    )
+  }
 }
 
 function ArtistData({data}) {
@@ -175,13 +189,14 @@ function ArtistData({data}) {
   )
 }
 
-function millisToMinutesAndSeconds(millis) {
+export function millisToMinutesAndSeconds(millis) {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
 function TrackData({data}) {
+  const trackId = data.id;
   const trackName = data.name;
   const artistName = data.artists[0].name;
   const artistId = data.artists[0].id;
@@ -194,7 +209,10 @@ function TrackData({data}) {
 
   const isrc = data.external_ids.isrc;
   const albumId= data.album.id;
+
+  const trackPageUrl = `/search/track?id=${trackId}`
   const artistPageUrl = `/search/artists?id=${artistId}`
+  const albumPageUrl = `/search/album?id=${albumId}`
 
   return (
     <div className="w-full grid gap-2 sm:grid-cols-2 md:grid-cols-6 justify-center px-6 py-6 border-b border-vert59/50">
@@ -206,16 +224,17 @@ function TrackData({data}) {
       </div>
 
       <div className="w-full bg-white sm:col-span-2 md:col-span-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3 sm:ml-0 ml-2 px-2 py-3 border-l border-b border-orangeVif shadow-spread rounded">        
-          <DataCell label="title" data={trackName} />
-          <DataCell label="artist" data={artistName} />
-          <DataCell label="album" data={albumName} />
+          <DataCell label="title" data={trackName} url={trackPageUrl} />
+          <DataCell label="artist" data={artistName} url={artistPageUrl} />
+          <DataCell label="album" data={albumName} url={albumPageUrl} />
           <DataCell label="track number" data={trackNumber} />
           <DataCell label="duration" data={duration} />
           <DataCell label="release date" data={releaseDate} />
           <DataCell label="ISRC" data={isrc} />
-          <DataCell label="album id" data={albumId} />
-          <DataCell label="artist id" data={artistId} />
-          <Link href={artistPageUrl} >Page</Link>
+          {/* <DataCell label="album id" data={albumId} /> */}
+          {/* <DataCell label="artist id" data={artistId} /> */}
+          {/* <Link href={artistPageUrl}>Artist Page</Link> */}
+          {/* <Link href={albumPageUrl}>Album Page</Link> */}
       </div>
     </div>
   )

@@ -14,7 +14,7 @@ export default function Home({user}) {
       <div className='flex flex-col py-10 justify-center items-center border border-ombreNaturelle31/60 shadow-sharp rounded'>
         
         <div className="flex flex-col bg-white justify-center items-center my-4 px-5 py-3 border-l border-b border-orangeVif shadow-spread rounded">
-          <h1 className="font-bowlbyOneSC text-4xl">Spotify App</h1>
+          <h1 className="font-bowlbyOneSC text-4xl">Spotify API Assistant</h1>
           <h2 className="font-monda text-xl">A Spotify Data Assistant</h2>
         </div>
 

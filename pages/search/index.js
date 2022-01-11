@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import cookie from 'cookie'
-import Iron from '@hapi/iron'
 
 import { getSessionCookie } from "..";
 import Results from "../../src/search/Results";
@@ -32,14 +31,32 @@ export default function Search({user, trackData, artistData, albumData, searchQu
   )
 }
 
-async function getArtistData(searchQuery, token) {
+async function getRefreshToken(refreshToken) {
+  const newToken = await fetch('https://accounts.spotify.com/api/token', 
+    {
+      headers: {
+        'Authorization': 'Basic ' + (new Buffer.from(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
+      },
+      form: {
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      }
+    }
+  ).then(response => response.json());
+  return newToken.access_token;
+}
+
+async function getArtistData(searchQuery, accessToken, refreshToken) {
 
   const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=artist`;
+
+  // const newToken = await getRefreshToken(refreshToken);
+  // console.log(newToken)
 
   const artistData = await fetch(url, 
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   ).then(response => response.json());
@@ -47,13 +64,13 @@ async function getArtistData(searchQuery, token) {
   return artistData;
 }
 
-async function getTrackData(searchQuery, token) {
+async function getTrackData(searchQuery, accessToken) {
   const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=track`;
 
   const trackData = await fetch(url, 
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   ).then(response => response.json());
@@ -61,13 +78,13 @@ async function getTrackData(searchQuery, token) {
   return trackData;
 }
 
-async function getAlbumData(searchQuery, token) {
+async function getAlbumData(searchQuery, accessToken) {
   const url = `https://api.spotify.com/v1/search?q=${searchQuery}&type=album`;
 
   const albumData = await fetch(url, 
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   ).then(response => response.json());
@@ -80,14 +97,16 @@ export async function getServerSideProps({req, query}) {
   const searchType = query.type;
 
   try {
+
     const cookies = cookie.parse(req.headers.cookie || '')
     const session = await getSessionCookie(cookies)
 
-    const token = session.token.access_token;
+    const accessToken = session.token.access_token;
+    const refreshToken = session.token.refresh_token;
 
-    const artistData = await getArtistData(searchQuery, token);
-    const trackData = await getTrackData(searchQuery, token);
-    const albumData = await getAlbumData(searchQuery, token);
+    const artistData = await getArtistData(searchQuery, accessToken, refreshToken);
+    const trackData = await getTrackData(searchQuery, accessToken);
+    const albumData = await getAlbumData(searchQuery, accessToken);
 
     return {
       props: {
@@ -101,12 +120,14 @@ export async function getServerSideProps({req, query}) {
     }
       
   } catch {
+
     return {
       redirect: {
         destination: '/',
         permanent: false,
       },
     }
+
   }
 
 }
