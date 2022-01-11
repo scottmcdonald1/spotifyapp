@@ -23,11 +23,11 @@ export default function Album({user, data, trackData, id}) {
     }
   }
 
-  const trackList = trackData.items.map(item => {
+  const trackList = trackData.items.map((item, i) => {
     const trackPageUrl = `/search/track?id=${item.id}`
 
     return (
-      <div className="grid grid-cols-3">
+      <div key={i} className="grid grid-cols-3">
         <h1>{item.name}</h1>
         <h1>{millisToMinutesAndSeconds(item.duration_ms)}</h1>
         <Link href={trackPageUrl}>Track Page</Link>

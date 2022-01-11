@@ -10,20 +10,23 @@ export default function Artists({user, data, albumData, id}) {
 
   const albumItems = albumData.items.map(item => {
 
-    const [displayTracks, setDisplayTracks] = useState(false)
+    // const [displayTracks, setDisplayTracks] = useState(false)
 
-    const trackList = displayTracks ? (
-      <div className="w-full grid grid-cols-1 px-8 py-2">
-        <div className="w-full border border-ombreNaturelle31/60 shadow-sharp rounded px-2 py-2">
-          <h1>tracks will go here</h1>
-        </div>
-      </div>
-    ) : (<></>);
+    // const trackList = displayTracks ? (
+    //   <div className="w-full grid grid-cols-1 px-8 py-2">
+    //     <div className="w-full border border-ombreNaturelle31/60 shadow-sharp rounded px-2 py-2">
+    //       <h1>tracks will go here</h1>
+    //     </div>
+    //   </div>
+    // ) : (<></>);
 
-    const showTracks = (e) => {
-      e.preventDefault();
-      setDisplayTracks(!displayTracks)
-    }
+    // const toggleTrackDisplay = () => {
+    //   if (displayTracks) {
+    //     setDisplayTracks(false);
+    //   } else {
+    //     setDisplayTracks(true);
+    //   }
+    // }
 
     return (
       <>
@@ -39,7 +42,6 @@ export default function Artists({user, data, albumData, id}) {
 
         <div className="col-span-1 grid justify-end">
           <button 
-          onClick={showTracks}
           className="rounded-full border hover:border-spotifyBlack hover:shadow-smallSpread text-ombreNaturelle31/70 hover:text-ombreNaturelle31 p-2 transition duration-150 ease-out">
             view tracks
           </button>
@@ -164,7 +166,7 @@ export async function getServerSideProps({req, query}) {
         permanent: false,
       },
     }
-    
+
   }
 
 }
